@@ -72,6 +72,17 @@ export class ReservationServiceService {
   }
 
 
+  async findReservationsByYear (appartement:number, year: number): Promise<any> {
+    try {
+      const response = await axios.get<any>(`http://localhost:9001/api/v1/reservation/find/year/${appartement}?year=${year}`);
+      console.log(response.data)
+      return {success: true, data: response.data};
+    } catch (error) {
+      console.error('Error fetching reservations by year:', error);
+      return {success: false};
+    }
+  }
+
 
 
 

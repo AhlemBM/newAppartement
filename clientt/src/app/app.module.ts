@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,6 @@ import { SharedModule } from "./shared/shared.module";
 import { DefaultModule } from "./default/default.module";
 import { CalenderComponent } from './component/calender/calender.component';
 import { LogementComponent } from './component/logement/logement.component';
-import { PayComponent } from './component/pay/pay.component';
 import { FactureComponent } from './component/facture/facture.component';
 import { ReservationComponent } from './component/reservation/reservation.component';
 import { HttpClientModule } from "@angular/common/http";
@@ -42,8 +41,9 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatSelectModule} from "@angular/material/select";
 import {NgChartsModule} from "ng2-charts";
 import { CircleProgressComponent } from './component/circle-progress/circle-progress.component';
-import { DetailAppartementComponent } from './component/detail-appartement/detail-appartement.component'; // importez le plugin timeGrid
-
+import { DetailAppartementComponent } from './component/detail-appartement/detail-appartement.component';
+import { PayOutComponent } from './component/pay-out/pay-out.component'; // importez le plugin timeGrid
+  import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -58,7 +58,6 @@ const routes: Routes = [
     HomeComponent,
     CalenderComponent,
     LogementComponent,
-    PayComponent,
     FactureComponent,
     ReservationComponent,
     UserComponent,
@@ -70,6 +69,7 @@ const routes: Routes = [
     AddReservationComponent,
     CircleProgressComponent,
     DetailAppartementComponent,
+    PayOutComponent,
 
   ],
   imports: [
@@ -91,7 +91,8 @@ const routes: Routes = [
     MatButtonModule,
     MatSortModule,
     MatSelectModule,
-   NgChartsModule
+   NgChartsModule,
+    NgxChartsModule
 
 
 

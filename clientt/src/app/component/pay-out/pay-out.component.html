@@ -1,0 +1,24 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+<div>
+  <label for="apartmentSelect">Select Apartment:</label>
+  <select id="apartmentSelect" [(ngModel)]="selectedApartment" (change)="loadReservations()">
+    <option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</option>
+  </select>
+</div>
+
+<ngx-charts-bar-vertical
+  *ngIf="barChartData.length"
+  [results]="barChartData"
+  [view]="view"
+  [xAxis]="true"
+  [yAxis]="true"
+  [legend]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [xAxisLabel]="'Month'"
+  [yAxisLabel]="'Price'"
+>
+</ngx-charts-bar-vertical>
+  </div>
+</div>

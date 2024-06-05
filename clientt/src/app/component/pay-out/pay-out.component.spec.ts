@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PayOutComponent } from './pay-out.component';
+
+describe('PayOutComponent', () => {
+  let component: PayOutComponent;
+  let fixture: ComponentFixture<PayOutComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [PayOutComponent]
+    });
+    fixture = TestBed.createComponent(PayOutComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

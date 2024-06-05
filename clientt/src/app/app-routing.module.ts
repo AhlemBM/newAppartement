@@ -15,10 +15,11 @@
   import {PerformanceComponent} from "./component/performance/performance.component";
   import {FactureComponent} from "./component/facture/facture.component";
   import {CalenderComponent} from "./component/calender/calender.component";
-  import {PayComponent} from "./component/pay/pay.component";
+
   import {ReservationComponent} from "./component/reservation/reservation.component";
   import {AddReservationComponent} from "./component/add/add-reservation/add-reservation.component";
   import {DetailAppartementComponent} from "./component/detail-appartement/detail-appartement.component";
+  import {PayOutComponent} from "./component/pay-out/pay-out.component";
 
   const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -37,7 +38,7 @@
         { path: 'performance', component: PerformanceComponent },
         { path: 'facturation', component: FactureComponent },
         { path: 'calendrier', component: CalenderComponent },
-        { path: 'pay', component: PayComponent },
+        { path: 'pay', component: PayOutComponent },
         { path: 'addreservation', component: AddReservationComponent },
         { path: 'reservation', component: ReservationComponent },
         { path: 'detail-appartement/:id', component: DetailAppartementComponent },
