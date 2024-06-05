@@ -1,0 +1,10 @@
+<div class="body-wrapper">
+
+  <div class="container-fluid">
+    <div class="filter-container">
+      <input type="text" [(ngModel)]="filteredAppartmentName" (input)="applyAppartmentNameFilter()">
+    </div>
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.blue-progress .circle-progress-svg {
+  fill: transparent;
+}
+
+.blue-progress .circle-progress-outer {
+  stroke: #B4CFEC; /* Couleur de contour */
+}
+
+.blue-progress .circle-progress-inner {
+  stroke: #488AC7; /* Couleur de remplissage */
+}

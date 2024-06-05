@@ -1,0 +1,33 @@
+<div class="body-wrapper">
+
+  <div class="container-fluid">
+    <div class="card w-100">
+      <div class="card-body p-4">
+        <h5 class="card-title fw-semibold mb-4">Rapports Mensuels</h5>
+        <div *ngIf="reports && reports.length > 0">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Mois</th>
+              <th>Total des Nuits</th>
+              <th>Occupation (%)</th>
+              <th>Prix total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let report of reports">
+              <td>{{ getMonthName(report.month) }} {{ report.year }}</td>
+              <td>{{ report.totalNights }}</td>
+              <td>{{ report.occupation }}</td>
+              <td>{{ report.totalPrice }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!reports || reports.length === 0">
+          <p>Aucun rapport mensuel disponible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

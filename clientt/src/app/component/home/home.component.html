@@ -1,0 +1,42 @@
+<div class="body-wrapper">
+<div class="container-fluid"><div class="container mt-5">
+  <div class="container mt-5">
+    <h2>Tableau de bord</h2>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <div class="row" *ngIf="!errorMessage">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">Nombre d'utilisateurs</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ userCount }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header">Nombre d'appartements</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ appartementCount }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-header">Réservations par mois</div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let reservation of reservationData">
+                {{ getMonthName(reservation.month) }} {{ reservation.year }}: {{ reservation.count }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>

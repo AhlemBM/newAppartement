@@ -1,0 +1,71 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <div class="card w-100">
+      <div class="card-body p-4">
+        <h5 class="card-title fw-semibold mb-4">Liste des Utilisateurs</h5>
+        <!-- Ajout des classes pour aligner à droite -->
+        <div class="d-flex justify-content-end mb-3">
+          <!-- Bouton "Ajouter Utilisateur" aligné à droite -->
+          <button class="btn btn-primary" (click)="goToAddUser()">Ajouter Utilisateur</button>
+        </div>
+        <div class="table-responsive" *ngIf="users && users.length > 0; else noData">
+          <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+            <tr>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Nom</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Email</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Appartement</h6>
+              </th>
+
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Statut</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Détails</h6>
+              </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of users">
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ user.nom }}   {{ user.prenom }}</h6></td>
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ user.email }}</h6></td>
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ user.numberOfApartments}}  locations</h6></td>
+
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">
+                  <span *ngIf="user.status === 0; else activeStatus">Inactif</span>
+                  <ng-template #activeStatus>Actif</ng-template>
+                </h6>
+              </td>
+              <td class="border-bottom-0">
+                <!-- Bouton de détails -->
+                <button class="btn btn-secondary btn-sm" (click)="showUserDetails(user)">Détails</button>
+
+              </td>
+
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noData>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-4">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="!errorMessage" class="alert alert-info mt-4">
+            Aucun utilisateur trouvé.
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</div>
+

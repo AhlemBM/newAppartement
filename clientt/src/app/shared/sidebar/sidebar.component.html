@@ -1,0 +1,70 @@
+<aside class="left-sidebar">
+  <div>
+    <div class="brand-logo d-flex align-items-center justify-content-between">
+      <a routerLink="/" class="text-nowrap logo-img">
+        <img src="./assets/images/logos/logo.PNG" width="50" style="margin-left: 50px;" alt="" />
+      </a>
+      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+        <i class="ti ti-x fs-8"></i>
+      </div>
+    </div>
+    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+      <ul id="sidebarnav">
+
+        <!-- Afficher les éléments spécifiques à l'administrateur -->
+        <li *ngIf="isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/liste-appartement')">
+            <i class="ti ti-home"></i>
+            <span class="hide-menu">Locations</span>
+          </button>
+        </li>
+        <li *ngIf="isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/proprietaire')">
+            <i class="ti ti-user"></i>
+            <span class="hide-menu">Propriétaires</span>
+          </button>
+        </li>
+
+
+        <li *ngIf="isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/reservation')">
+            <i class="ti ti-graph"></i>
+            <span class="hide-menu">Réservation</span>
+          </button>
+        </li>
+        <li *ngIf="!isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/performance')">
+            <i class="ti ti-pie-chart "></i> <!-- Update the icon class to match the style -->
+            <span class="hide-menu">Performance</span>
+          </button>
+        </li>
+        <li *ngIf="!isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/calendrier')">
+            <i class="ti ti-calendar"></i>
+            <span class="hide-menu">Calendrier</span>
+          </button>
+        </li>
+
+   <li *ngIf="!isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/pay')">
+            <i class="ti ti-brand-paypal"></i>
+            <span class="hide-menu">Pay-Out</span>
+          </button>
+        </li>
+
+   <li *ngIf="!isAdmin" class="sidebar-item">
+          <button class="sidebar-router btn" (click)="navigateTo('/facturation')">
+            <i class="ti ti-checkup-list"></i>
+            <span class="hide-menu">Facturation</span>
+          </button>
+        </li>
+
+
+
+      </ul>
+      <div class="d-flex align-items-center justify-content-between px-4 py-2">
+        <button class="btn btn-primary w-100" (click)="logout()">Déconnexion</button>
+      </div>
+    </nav>
+  </div>
+</aside>

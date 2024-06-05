@@ -1,0 +1,86 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <div class="card w-100">
+      <div class="card-body p-4">
+        <h5 class="card-title fw-semibold mb-4">Liste des Réservations</h5>
+
+        <div class="d-flex justify-content-end mb-3">
+          <button mat-button color="primary" (click)="goToAddReservation()">Ajouter Réservation</button>
+        </div>
+
+        <div class="mb-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Filter by Logement</mat-label>
+            <!-- Change the mat-select to an input field -->
+            <input matInput placeholder="Filter by Logement" [(ngModel)]="filterLogement" (input)="applyFilter()">
+          </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Filter by Year</mat-label>
+            <!-- Change the mat-select to an input field -->
+            <input matInput type="number" placeholder="Filter by Year" [(ngModel)]="filterYear" (input)="applyFilter()">
+          </mat-form-field>
+        </div>
+
+
+        <div class="table-responsive" *ngIf="reservations && reservations.length > 0; else noData">
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="appartement">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Appartement </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.appartement?.name }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date_debut">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Début </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.date_debut }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nom_client">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Client </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.nom_client }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre_nuits">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Nuits </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.nombre_nuits }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="commission">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Commission </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.commission }} € </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prix_total">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix Total </th>
+              <td mat-cell *matCellDef="let reservation"> {{ reservation.prix_total }} € </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+              <td mat-cell *matCellDef="let reservation">
+                <span *ngIf="reservation.status === 0; else occupied">Disponible</span>
+                <ng-template #occupied>Occupé</ng-template>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        <ng-template #noData>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-4">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="!errorMessage" class="alert alert-info mt-4">
+            Aucune réservation trouvée.
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

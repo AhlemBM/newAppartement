@@ -1,0 +1,40 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <h5 class="card-title fw-semibold mb-4">Create Reservation</h5>
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="appartementNom" class="form-label">Appartement</label>
+            <select class="form-control" id="appartementNom" [(ngModel)]="selectedAppartement" name="appartementNom" required>
+              <option *ngFor="let appartement of appartements" [ngValue]="appartement">{{ appartement.name }}</option>
+            </select>
+            <span class="message">(Sélectionnez un appartement)</span>
+          </div>
+          <div class="mb-3">
+            <label for="nom_client" class="form-label">Nom du Client</label>
+            <input type="text" class="form-control" id="nom_client" [(ngModel)]="reservation.nom_client" name="nom_client" required>
+          </div>
+          <div class="mb-3">
+            <label for="date_debut" class="form-label">Date de Début</label>
+            <input type="date" class="form-control" id="date_debut" [(ngModel)]="reservation.date_debut" name="date_debut" required>
+          </div>
+          <div class="mb-3">
+            <label for="nombre_nuits" class="form-label">Nombre de Nuits</label>
+            <input type="number" class="form-control" id="nombre_nuits" [(ngModel)]="reservation.nombre_nuits" name="nombre_nuits" required>
+          </div>
+          <div class="mb-3">
+            <label for="commission" class="form-label">Commission</label>
+            <input type="number" class="form-control" id="commission" [(ngModel)]="reservation.commission" name="commission" required>
+          </div>
+          <div class="mb-3">
+            <label for="prix_nuit" class="form-label">Prix par Nuit</label>
+            <input type="number" class="form-control" id="prix_nuit" [(ngModel)]="reservation.prix_nuit" name="prix_nuit" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Create Reservation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

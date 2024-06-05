@@ -1,0 +1,65 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <div class="card w-100">
+      <div class="card-body p-4">
+        <h5 class="card-title fw-semibold mb-4">Liste des Appartements</h5>
+        <!-- Ajout des classes pour aligner à droite -->
+
+        <div class="d-flex justify-content-end mb-3">
+          <!-- Bouton "Ajouter Appartement" aligné à droite -->
+          <button class="btn btn-primary" (click)="goToAddAppartement()">Ajouter Appartement</button>
+        </div>
+        <div class="table-responsive" *ngIf="appartements && appartements.length > 0; else noData">
+          <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+            <tr>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Name</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Addresse</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Propriétaire</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Statut</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Actions</h6>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let appartement of appartements">
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ appartement.name }}</h6></td>
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ appartement.addresse }}</h6></td>
+              <td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">{{ appartement.user.fullName }} </h6></td>
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">
+                  <span *ngIf="appartement.status === 0; else occupied">Disponible</span>
+                  <ng-template #occupied>Occupé</ng-template>
+                </h6>
+              </td>
+              <td class="border-bottom-0">
+                <!-- Bouton de modification avec la classe "btn-success" pour la couleur verte -->
+                <button class="btn btn-danger btn-sm stylish-delete-button" (click)="deleteAppartement(appartement.id)">Supprimer</button>
+                <button class="btn btn-info btn-sm" (click)="goToDetail(appartement.id)">Détail</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noData>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-4">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="!errorMessage" class="alert alert-info mt-4">
+            Aucun appartement trouvé.
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+

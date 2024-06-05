@@ -1,0 +1,17 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+<div class="container">
+  <h2>Modifier l'utilisateur</h2>
+  <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input id="nom" formControlName="nom" class="form-control" />
+    </div>
+
+
+    <!-- Ajoutez d'autres champs nécessaires -->
+    <button type="submit" class="btn btn-primary" [disabled]="editUserForm.invalid">Modifier</button>
+  </form>
+</div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <h5 class="card-title fw-semibold mb-4">Create Appartement</h5>
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="addresse" class="form-label">Addresse</label>
+            <input type="text" class="form-control" id="addresse" [(ngModel)]="addresse" name="addresse" required>
+          </div>
+          <div class="mb-3">
+            <label for="frais_menage" class="form-label">Frais de Menage</label>
+            <input type="text" class="form-control" id="frais_menage" [(ngModel)]="frais_menage" name="fraisMenage" required>
+          </div>
+          <div class="mb-3">
+            <label for="owner" class="form-label">Propriétaire</label>
+            <select class="form-control" id="owner" [(ngModel)]="selectedOwner" name="owner" required>
+              <option  *ngFor="let owner of owners" [ngValue]="owner">{{ owner.email }}</option>
+            </select>
+            <span class="message">(Sélectionnez un propriétaire)</span> <!-- Message à côté du champ de sélection -->
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
