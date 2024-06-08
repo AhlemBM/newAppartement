@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {  constructor(
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
+
       return true; // Allow access if the user is logged in
     } else {
       this.router.navigate(['/login']); // Redirect to login if not logged in
@@ -18,7 +19,7 @@ export class AuthGuard implements CanActivate {  constructor(
     }
   }
 };
-/*@Injectable({
+@Injectable({
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
@@ -34,4 +35,4 @@ export class RoleGuard implements CanActivate {
       return false;
     }
   }
-}*/
+}

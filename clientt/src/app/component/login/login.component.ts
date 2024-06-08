@@ -22,11 +22,16 @@ export class LoginComponent implements OnInit{
       .then(response => {
         if (response.success) {
           const { token, user } = response.data;
-          console.log(response)
+          console.log(response);
           console.log('Token:', token);
           console.log('User:', user);
-          console.log('Redirecting to homepage...');
-          this.router.navigate(['/']); // Rediriger vers le tableau de bord après la connexion
+          if (this.loginService.isAdmin()) {
+            console.log('Redirecting to homepage...');
+            this.router.navigate(['/']); // Rediriger vers le tableau de bord après la connexion
+          } else {
+            console.log('Redirecting to performance page...');
+            this.router.navigate(['/performance']); // Rediriger vers la page de performance
+          }
         } else {
           this.errorMessage = response.message;
         }
@@ -35,6 +40,7 @@ export class LoginComponent implements OnInit{
         this.errorMessage = 'An error occurred. Please try again.';
       });
   }
+
   navigateTo(path: string) {
     this.router.navigate([path]);
   }

@@ -1,42 +1,45 @@
 <div class="body-wrapper">
-<div class="container-fluid"><div class="container mt-5">
-  <div class="container mt-5">
-    <h2>Tableau de bord</h2>
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-    <div class="row" *ngIf="!errorMessage">
-      <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3">
-          <div class="card-header">Nombre d'utilisateurs</div>
-          <div class="card-body">
-            <h5 class="card-title">{{ userCount }}</h5>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+        <div class="card card-bd">
+          <div class="bg-warning card-border"></div>
+          <div class="card-body box-style">
+            <div class="media align-items-center">
+              <div class="media-body me-3">
+                <h2 class="count num-text text-black font-w700">{{ userCount }}</h2>
+                <span class="fs-14">Total Users</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card text-white bg-success mb-3">
-          <div class="card-header">Nombre d'appartements</div>
-          <div class="card-body">
-            <h5 class="card-title">{{ appartementCount }}</h5>
+      <div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+        <div class="card card-bd">
+          <div class="bg-primary card-border"></div>
+          <div class="card-body box-style">
+            <div class="media align-items-center">
+              <div class="media-body me-3">
+                <h2 class="count num-text text-black font-w700">{{ appartementCount }}</h2>
+                <span class="fs-14">Total Appartements</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card text-white bg-info mb-3">
-          <div class="card-header">Réservations par mois</div>
-          <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item" *ngFor="let reservation of reservationData">
-                {{ getMonthName(reservation.month) }} {{ reservation.year }}: {{ reservation.count }}
-              </li>
-            </ul>
+      <div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+        <div class="card card-bd">
+          <div class="bg-info card-border"></div>
+          <div class="card-body box-style">
+            <div class="media align-items-center">
+              <div class="media-body me-3">
+                <h2 class="count num-text text-black font-w700">{{ reservationData.length }}</h2>
+                <span class="fs-14">Total Reservations</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-</div>
 </div>

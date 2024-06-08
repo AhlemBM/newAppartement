@@ -32,12 +32,15 @@
             <span class="hide-menu">Réservation</span>
           </button>
         </li>
+
         <li *ngIf="!isAdmin" class="sidebar-item">
           <button class="sidebar-router btn" (click)="navigateTo('/performance')">
-            <i class="ti ti-pie-chart "></i> <!-- Update the icon class to match the style -->
+            <i class="ti ti-chart-bar"></i>
             <span class="hide-menu">Performance</span>
           </button>
         </li>
+
+
         <li *ngIf="!isAdmin" class="sidebar-item">
           <button class="sidebar-router btn" (click)="navigateTo('/calendrier')">
             <i class="ti ti-calendar"></i>
