@@ -13,23 +13,8 @@ export const getDashboardData = async (req: Request, res: Response) => {
         const userCount = await userRepository.count();
         const appartementCount = await appartementRepository.count();
 
-        // Get reservations per month for MySQL
-        const reservations = await reservationRepository
-            .createQueryBuilder('reservation')
-            .select('YEAR(reservation.date_debut) as year')
-            .addSelect('MONTH(reservation.date_debut) as month')
-            .addSelect('COUNT(*) as count')
-            .groupBy('year')
-            .addGroupBy('month')
-            .orderBy('year')
-            .addOrderBy('month')
-            .getRawMany();
 
-        const reservationData = reservations.map(r => ({
-            year: r.year,
-            month: r.month,
-            count: Number(r.count),
-        }));
+        const reservationData = await reservationRepository.count();
 
         return res.status(200).json({
             success: true,

@@ -9,7 +9,7 @@ import {DashbordService} from "../../services/dashboardService/dashbord.service"
 export class HomeComponent {
   userCount: number | null = null;
   appartementCount: number | null = null;
-  reservationData: { year: number, month: number, count: number }[] = [];
+  reservationData:  number | null = null;
   errorMessage: string | null = null;
 
   constructor(private dashboardService: DashbordService) {}
