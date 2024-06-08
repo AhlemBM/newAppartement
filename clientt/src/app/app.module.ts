@@ -44,6 +44,10 @@ import { CircleProgressComponent } from './component/circle-progress/circle-prog
 import { DetailAppartementComponent } from './component/detail-appartement/detail-appartement.component';
 import { PayOutComponent } from './component/pay-out/pay-out.component'; // importez le plugin timeGrid
   import { NgxChartsModule } from '@swimlane/ngx-charts';
+  import {MatNativeDateModule} from "@angular/material/core";
+  import {MatDatepickerModule} from "@angular/material/datepicker";
+  import {PayComponent} from "./component/pay/pay.component";
+  import {PerformanceeComponent} from "./component/performancee/performancee.component";
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -70,6 +74,8 @@ const routes: Routes = [
     CircleProgressComponent,
     DetailAppartementComponent,
     PayOutComponent,
+    PayComponent,
+    PerformanceeComponent
 
   ],
   imports: [
@@ -92,7 +98,11 @@ const routes: Routes = [
     MatSortModule,
     MatSelectModule,
    NgChartsModule,
-    NgxChartsModule
+    NgxChartsModule,
+
+    MatDatepickerModule,
+    MatNativeDateModule,
+
 
 
 

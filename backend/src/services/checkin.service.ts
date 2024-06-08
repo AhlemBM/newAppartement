@@ -88,7 +88,8 @@ export const findReservationsByYear = async (year: number, appartementId: number
       const apartmentId = reservation.appartement.id;
 
       const key = `${year}-${month}-${apartmentId}`;
-
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      console.log("**********************************"+daysInMonth)
       if (!report[key]) {
         report[key] = {
           year: year,
@@ -101,9 +102,13 @@ export const findReservationsByYear = async (year: number, appartementId: number
       }
 
       report[key].totalNights += reservation.nombre_nuits;
-      report[key].occupation++;
+
+      // Calcul du taux d'occupation
+      report[key].occupation += (reservation.nombre_nuits / daysInMonth)*100;
       report[key].totalPrice += reservation.prix_total;
     });
+
+
 
     // Convert the report object to an array
     return Object.values(report);
@@ -149,8 +154,16 @@ export const findReservationsByYearAndApartment = async (year: number, /*userId:
       const startDate = new Date(reservation.date_debut);
       const month = startDate.getMonth();
       report[month].totalNights += reservation.nombre_nuits; // Assurez-vous que ChekinEntity contient la propriété totalNights
-      report[month].occupation++;
+      // Calcul du nombre de jours dans le mois
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      console.log("**********************************"+daysInMonth)
+      // Calcul du taux d'occupation
+      report[month].occupation += reservation.nombre_nuits / daysInMonth;
       report[month].totalPrice += reservation.prix_total;
+    });
+    // Calculer le taux d'occupation final
+    report.forEach(monthlyReport => {
+      monthlyReport.occupation = (monthlyReport.occupation / report.length) * 100; // en pourcentage
     });
 
     // Retournez le rapport
@@ -160,6 +173,41 @@ export const findReservationsByYearAndApartment = async (year: number, /*userId:
     throw error;
   }
 };
+
+export const findReservedDatesByApartment = async (apartmentId: number) => {
+  try {
+    const reservations: ChekinEntity[] = await checkinRespository.find({
+      where: {
+        appartement: Equal(apartmentId)
+      }
+    });
+
+    // Initialiser un tableau pour stocker toutes les dates réservées
+    let reservedDates: Date[] = [];
+
+    // Parcourir chaque réservation pour extraire les dates de début et les dates suivantes
+    reservations.forEach(reservation => {
+      const startDate = new Date(reservation.date_debut);
+      const nights = reservation.nombre_nuits;
+
+      // Ajouter la date de début
+      reservedDates.push(startDate);
+
+      // Ajouter les dates suivantes en fonction du nombre de nuits réservées
+      for (let i = 1; i < nights; i++) {
+        const nextDate = new Date(startDate);
+        nextDate.setDate(startDate.getDate() + i);
+        reservedDates.push(nextDate);
+      }
+    });
+
+    return reservedDates;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des dates réservées pour l\'appartement : ', error);
+    throw error;
+  }
+};
+
 
 
 interface MonthlyReport {

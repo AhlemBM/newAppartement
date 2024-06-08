@@ -8,7 +8,7 @@ import {
   validatorUpdate,
 } from '../../middleware/validation/reservation';
 import {create, deleteCheckin, findAll, findById, update } from "../../controllers/reservation";
-import {findByMonth} from "../../controllers/reservation/findByMonth";
+import {findByMonth, findReservedDates} from "../../controllers/reservation/findByMonth";
 
 
 
@@ -22,6 +22,7 @@ router.delete('/delete/:id', [checkJwt], deleteCheckin);
 router.put('/update/:id', [checkJwt, validatorUpdate], update);
 router.get('/find/:id', findById);
 router.get('/find/year/:id', findByMonth);
+router.get('/find/date/:id', findReservedDates);
 
 
 export default router;

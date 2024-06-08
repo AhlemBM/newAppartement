@@ -1,32 +1,39 @@
 <div class="body-wrapper">
   <div class="container-fluid">
-    <div class="body-wrapper">
-      <div class="container-fluid">
-        <div class="card overflow-hidden">
-          <div class="card-body p-4">
-            <h5 class="card-title mb-9 fw-semibold">Taux d'occupation de cette mois </h5>
-            <div class="row">
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <app-circle-progress
-                          [percent]="globalOccupancyRate"
-                          [outerStrokeColor]="'#B4CFEC'"
-                          [innerStrokeColor]="'#488AC7'"
-                        ></app-circle-progress>
-                        <p class="mt-2">{{ globalOccupancyRate | number: '1.0-2' }}%</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div>
+      <label for="apartmentSelect">Select Apartment:</label>
+      <select id="apartmentSelect" [(ngModel)]="selectedApartment" (change)="loadReservations()">
+        <option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <app-circle-progress
+              [percent]="globalOccupancyRate"
+              [outerStrokeColor]="'#B4CFEC'"
+              [innerStrokeColor]="'#488AC7'"
+            ></app-circle-progress>
+            <p class="mt-2">{{ globalOccupancyRate | number: '1.0-2' }}%</p>
           </div>
         </div>
       </div>
     </div>
+
+    <ngx-charts-bar-vertical
+      *ngIf="barChartData.length"
+      [results]="barChartData"
+      [view]="view"
+      [xAxis]="true"
+      [yAxis]="true"
+
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Month'"
+      [yAxisLabel]="'Price'"
+    >
+    </ngx-charts-bar-vertical>
 
   </div>
 </div>

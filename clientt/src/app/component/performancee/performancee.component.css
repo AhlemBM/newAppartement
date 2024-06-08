@@ -1,0 +1,21 @@
+
+  .body-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .header-nav {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .main {
+    flex: 1 1 auto;
+    margin-top: 20px;
+  }
+
+  .container-fluid {
+    padding: 0 15px;
+  }
+

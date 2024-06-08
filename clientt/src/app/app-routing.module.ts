@@ -20,6 +20,8 @@
   import {AddReservationComponent} from "./component/add/add-reservation/add-reservation.component";
   import {DetailAppartementComponent} from "./component/detail-appartement/detail-appartement.component";
   import {PayOutComponent} from "./component/pay-out/pay-out.component";
+  import {PayComponent} from "./component/pay/pay.component";
+  import {PerformanceeComponent} from "./component/performancee/performancee.component";
 
   const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -28,17 +30,17 @@
       component: DefaultComponent,
       canActivate: [AuthGuard],
       children: [
-        { path: '', component: HomeComponent },
+        { path: '', component: LogementComponent },
         { path: 'addAppartement', component: AppartementComponent },
         { path: 'liste-appartement', component: LogementComponent },
         { path: 'proprietaire', component: UserComponent },
         { path: 'profile', component: ProfileComponent },
         { path: 'register', component: RegisterComponent },
         { path: 'detail/:id', component: DetailProprietaireComponent },
-        { path: 'performance', component: PerformanceComponent },
+        { path: 'performance', component: PerformanceeComponent },
         { path: 'facturation', component: FactureComponent },
         { path: 'calendrier', component: CalenderComponent },
-        { path: 'pay', component: PayOutComponent },
+        { path: 'pay', component: PayComponent },
         { path: 'addreservation', component: AddReservationComponent },
         { path: 'reservation', component: ReservationComponent },
         { path: 'detail-appartement/:id', component: DetailAppartementComponent },

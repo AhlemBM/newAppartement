@@ -1,0 +1,66 @@
+<div class="body-wrapper">
+  <div class="container-fluid">
+    <div class="row justify-content-between m-2 w-100 mb-3">
+      <div class="col-md-4 row">
+        <div class="form-group p-2 w-50">
+          <select id="housingSelector" class="form-control bg-white rounded-pill" [(ngModel)]="selectedApartment"
+                  (change)="loadReservations()">
+            <option *ngFor="let housing of apartments" [value]="housing.id">{{ housing.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2 row">
+        <div class="form-group p-2">
+          <select id="yearSelector" class="form-control bg-white rounded-pill">
+            <option>{{ year }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="container col-12">
+      <div class="row">
+        <!-- First Card with col-md-3 -->
+        <div class="col-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Layer</h5>
+              <hr>
+              <div class="container mt-5">
+                <h2 class="card-text text-center pt-3 text-primary">{{ totalPrixAppartement | currency:'USD':'symbol' }}</h2>
+                <p class="card-text text-center">Layers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Card with col-md-3 -->
+        <div class="col-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Taux d'occupation</h5>
+              <hr>
+              <div class="chart-container w-100" style="position: relative; height:30vh;">
+                <canvas class="w-100" #doughnutCanvas></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third Card with col-md-6 -->
+        <div class="col-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Évaluation des layers</h5>
+              <hr>
+              <div class="chart-container w-100" style="position: relative; height:30vh;">
+                <canvas class="w-100" #barCanvas></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  </div>
+</div>
