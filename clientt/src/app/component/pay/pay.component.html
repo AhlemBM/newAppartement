@@ -1,42 +1,25 @@
 <div class="body-wrapper">
   <div class="container-fluid">
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-         data-sidebar-position="fixed" data-header-position="fixed">
-      <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-        <div class="d-flex align-items-center justify-content-center w-100">
-          <div class="row justify-content-center w-100">
-            <div class="col-md-8 col-lg-6 col-xxl-3">
-              <div class="card mb-0">
-                <div class="card-body">
-                  <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                    <img src="" width="180" alt=""><p>HOME SUITE HOME</p>
-                  </a>
-
-                  <div class="mb-3">
-                    <label  class="form-label" >Pay coube de {{ year }}</label>
-
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Select Housing</label>
-                    <select [(ngModel)]="selectedApartment" (change)="loadReservations()">
-                      <option value="" disabled>Sélectionnez un appartement</option>
-                      <option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</option>
-                    </select>
-                  </div>
-
-                  <canvas #barCanvas></canvas>
-
-
-                  <!-- End Error Message -->
-
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-2">
+        <div class="form-group rounded-circle">
+          <select id="housingSelector" class="form-control" [(ngModel)]="selectedApartment" (change)="loadReservations()">
+            <option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="yearSelector" class="form-control" [(ngModel)]="year" (change)="loadReservations()">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
         </div>
       </div>
     </div>
-
+    <div class="col-md-12 mt-3 p-2">
+      <h2 class="chart-header m-3 h4">Évolution des Pay-Out</h2>
+      <hr class="chart-divider border-dark">
+      <canvas #barCanvas></canvas>
+    </div>
   </div>
 </div>

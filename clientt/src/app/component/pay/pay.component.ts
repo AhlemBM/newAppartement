@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import Chart from 'chart.js/auto';
+
 import {AppartementService} from "../../services/appartementService/appartement.service";
+
+import {Component, ElementRef, ViewChild} from "@angular/core";
+import {Chart} from "chart.js";
 import {ReservationServiceService} from "../../services/reservationService/reservation-service.service";
 
 @Component({
@@ -10,22 +12,25 @@ import {ReservationServiceService} from "../../services/reservationService/reser
 })
 export class PayComponent {
 
-
-  @ViewChild('barCanvas', { static: true }) barCanvas!: ElementRef;
-   year = new Date().getFullYear();
-  apartments: any[] = [];
-  selectedApartment: number | null = null;
-  reservation: any[] = [];
+  @ViewChild('barCanvas') private barCanvas!: ElementRef;
   barChart: any;
-  selectedYear: number = new Date().getFullYear();
-  selectedHousing: string = ''; // Assurez-vous d'avoir cette valeur correctement définie
+  years: number[] = [2022, 2023, 2024];
+  year: number = 2024;
+  apartments: any[] = [];
+  selectedApartment: number=0;
+  reservations: any[] = [];
 
+  constructor(
+    private appartementService: AppartementService,
+    private reservationService: ReservationServiceService
+  ) { }
 
-  constructor(private reservationService: ReservationServiceService, private appartementService: AppartementService) {}
-
-  ngOnInit() {
-    this.createChart(); // Créer le graphique initial vide
+  ngOnInit(): void {
     this.loadApartments();
+  }
+
+  ngAfterViewInit(): void {
+    this.loadReservations();
   }
 
   async loadApartments() {
@@ -41,9 +46,7 @@ export class PayComponent {
     if (this.selectedApartment) {
       try {
         const response = await this.reservationService.findReservationsByYear(this.selectedApartment, this.year);
-        this.reservation = response.data.data.reservations;
-
-        // Une fois les réservations chargées, appelez la méthode pour créer le graphique
+        this.reservations = response.data.data.reservations;
         this.createChart();
       } catch (error) {
         console.error('Error loading reservations:', error);
@@ -51,20 +54,27 @@ export class PayComponent {
     }
   }
 
+  getDataForYearAndHousing(): number[] {
+    const monthlyPayments: number[] = Array(12).fill(0);
+    this.reservations.forEach(reservation => {
+      const month = reservation.month - 1;
+      const totalPrice = reservation.totalPrice;
+      monthlyPayments[month] += totalPrice;
+    });
+    return monthlyPayments;
+  }
+
   createChart() {
-    if (this.barChart) {
-      this.barChart.destroy(); // Détruire le graphique précédent s'il existe
-    }
-
-    const labels = ['jan.', 'fev.', 'mar.', 'avr.', 'mai.', 'juin.', 'juil.', 'aou.', 'sep.', 'oct.', 'nov.', 'dec.'];
     const data = this.getDataForYearAndHousing();
-
+    if (this.barChart) {
+      this.barChart.destroy();
+    }
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: ['jan.', 'fev.', 'mar.', 'avr.', 'mai.', 'juin.', 'juil.', 'aou.', 'sep.', 'oct.', 'nov.', 'dec.'],
         datasets: [{
-          label: `Payout versé ${this.selectedYear} - ${this.selectedHousing}`,
+          label: `Pay-out versé ${this.year}`,
           data: data,
           backgroundColor: 'rgba(0, 123, 255, 0.5)',
           borderColor: 'rgba(0, 123, 255, 1)',
@@ -79,16 +89,5 @@ export class PayComponent {
         }
       }
     });
-  }
-  getDataForYearAndHousing(): number[] {
-    const monthlyPayments: number[] = Array(12).fill(0);
-
-    this.reservation.forEach(reservation => {
-      const month = reservation.month - 1; // Mois commence à 1, alors que les index du tableau commencent à 0
-      const totalPrice = reservation.totalPrice;
-      monthlyPayments[month] += totalPrice;
-    });
-
-    return monthlyPayments;
   }
 }

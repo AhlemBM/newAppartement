@@ -11,8 +11,7 @@
   import {UserComponent} from "./component/user/user/user.component";
   import {ProfileComponent} from "./component/profile/profile.component";
   import {DetailProprietaireComponent} from "./component/detail-proprietaire/detail-proprietaire.component";
-  import {EditUserComponent} from "./component/edit-user/edit-user.component";
-  import {PerformanceComponent} from "./component/performance/performance.component";
+
   import {FactureComponent} from "./component/facture/facture.component";
   import {CalenderComponent} from "./component/calender/calender.component";
 
@@ -20,8 +19,9 @@
   import {AddReservationComponent} from "./component/add/add-reservation/add-reservation.component";
   import {DetailAppartementComponent} from "./component/detail-appartement/detail-appartement.component";
   import {PayOutComponent} from "./component/pay-out/pay-out.component";
-  import {PayComponent} from "./component/pay/pay.component";
+
   import {PerformanceeComponent} from "./component/performancee/performancee.component";
+  import {PayComponent} from "./component/pay/pay.component";
 
   const routes: Routes = [
     { path: 'login', component: LoginComponent },

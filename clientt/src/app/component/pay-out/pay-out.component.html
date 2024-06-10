@@ -1,24 +1,30 @@
 <div class="body-wrapper">
   <div class="container-fluid">
-<div>
-  <label for="apartmentSelect">Select Apartment:</label>
-  <select id="apartmentSelect" [(ngModel)]="selectedApartment" (change)="loadReservations()">
-    <option *ngFor="let apartment of apartments" [value]="apartment.id">{{ apartment.name }}</option>
-  </select>
-</div>
+    <div class="row d-flex justify-content-between ">
+      <div class="col-md-2 row ">
+        <div class="form-group rounded-circle">
+          <select id="housingSelector" class="form-control" [(ngModel)]="selectedHousing" (change)="onHousingChange()">
+            <option *ngFor="let housing of housings" [value]="housing">{{ housing }}</option>
+          </select>
 
-<ngx-charts-bar-vertical
-  *ngIf="barChartData.length"
-  [results]="barChartData"
-  [view]="view"
-  [xAxis]="true"
-  [yAxis]="true"
-  [legend]="true"
-  [showXAxisLabel]="true"
-  [showYAxisLabel]="true"
-  [xAxisLabel]="'Month'"
-  [yAxisLabel]="'Price'"
->
-</ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <div class="col-md-2 row">
+        <div class="form-group">
+          <select id="yearSelector" class="form-control" [(ngModel)]="selectedYear" (change)="onYearChange()">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-12  mt-3 p-2">
+      <h2 class="chart-header m-3 h4">Evolution des Pay-Out</h2>
+      <hr class="chart-divider border-dark
+
+          ">
+      <canvas #barCanvas></canvas>
+
+    </div>
   </div>
 </div>
