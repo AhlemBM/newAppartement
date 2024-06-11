@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {
     findReservationsByYear,
-    findReservationsByYearAndApartment,
+
     findReservedDatesByApartment
 } from "../../services/checkin.service";
 import {Equal} from "typeorm";

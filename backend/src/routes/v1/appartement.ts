@@ -8,7 +8,7 @@ import {
   validatorUpdate,
 } from '../../middleware/validation/appartement';
 import { checkRole } from '../../middleware/checkRole';
-import {findById} from "../../controllers/appartement/findById";
+import {findById, findByIdUser} from "../../controllers/appartement/findById";
 
 
 
@@ -19,4 +19,5 @@ router.get('/getAll',  findAll);
 router.delete('/delete/:id', [checkJwt],checkRole(['ADMIN']), deleteAppartement);
 router.put('/update/:id', [checkJwt,checkRole(['ADMIN'])], update);
 router.get('/find/:id',  findById);
+router.get('/find/', [checkJwt], findByIdUser);
 export default router;

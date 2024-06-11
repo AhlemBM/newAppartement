@@ -86,4 +86,20 @@ export class AppartementService {
       throw new Error(error.response?.data?.message || 'Failed to fetch appartement details');
     }
   }
+  async getAppartementByIdUser(): Promise<any> {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      return {success: false, message: 'No authentication token found'};
+    }
+    try {
+      const response = await axios.get(`${this.backendUrl}/find/`,{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || 'Failed to fetch appartement details');
+    }
+  }
 }
