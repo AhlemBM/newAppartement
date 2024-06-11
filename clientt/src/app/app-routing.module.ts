@@ -22,6 +22,7 @@
 
   import {PerformanceeComponent} from "./component/performancee/performancee.component";
   import {PayComponent} from "./component/pay/pay.component";
+  import {EditUserComponent} from "./component/edit-user/edit-user.component";
 
   const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -34,7 +35,7 @@
         { path: 'addAppartement', component: AppartementComponent },
         { path: 'liste-appartement', component: LogementComponent },
         { path: 'proprietaire', component: UserComponent },
-        { path: 'profile', component: ProfileComponent },
+        { path: 'profile', component: EditUserComponent },
         { path: 'register', component: RegisterComponent },
         { path: 'detail/:id', component: DetailProprietaireComponent },
         { path: 'performance', component: PerformanceeComponent },

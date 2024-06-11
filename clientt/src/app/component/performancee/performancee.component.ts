@@ -38,7 +38,7 @@ export class PerformanceeComponent implements OnInit, AfterViewInit {
   async loadApartments() {
     try {
       const response = await this.appartementService.getAppartementByIdUser();
-      this.apartments = response.data.data.appartements;
+      this.apartments = response.data.appartements;
     } catch (error) {
       console.error('Error loading apartments:', error);
     }

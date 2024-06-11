@@ -7,33 +7,34 @@ import {
 } from '../../services/user.service';
 
 export const editProfile = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+    req: Request,
+    res: Response,
+    next: NextFunction
 ) => {
-  const { email } = req.body;
-  const id  = req.params.id;
+  const id = req.params.id;
   try {
     const user = await findUserById(Number(id));
-
 
     if (!user) {
       return res.customSuccess(200, 'Error', {}, false);
     }
-    if (email) user.email = email;
+
+    // Mise à jour de tous les attributs de l'utilisateur en fonction des données envoyées depuis le front-end
+    Object.assign(user, req.body);
 
     await saveUser(user);
     return res.customSuccess(
-      200,
-      'Profile successfully changed.',
-      { user },
-      true
+        200,
+        'Profile successfully changed.',
+        { user },
+        true
     );
   } catch (err) {
     console.log(err);
     return res.customSuccess(200, 'Error', {}, false);
   }
 };
+
 export const deleteProfile = async (
   req: Request,
   res: Response,

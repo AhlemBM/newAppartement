@@ -1,63 +1,31 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {User, UserService} from "../../services/user/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { User, UserService } from "../../services/user/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import {RegisterService} from "../../services/authService/auth.service";
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent {
-  editUserForm: FormGroup;
-  userId: number | null = null;
-  user: User | null = null;
+export class EditUserComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private userService: UserService,
-    private fb: FormBuilder
-  ){
-    this.editUserForm = this.fb.group({
-
-      nom: ['', Validators.required],
-
-      // Ajoutez d'autres champs nécessaires
-    });
-  }
-
+  constructor(private userService: UserService, private  userS:RegisterService) { }
+  user: any;
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam !== null) {
-      this.userId = +idParam;
-      this.userService.getUserById(this.userId).then(
-        (data) => {
-          this.user = data;
-          if (this.user) {
-            this.editUserForm.patchValue(this.user);
-          }
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération de l\'utilisateur', error);
-        }
-      );
-    } else {
-      console.error('ID utilisateur manquant dans l\'URL');
+    this.user = this.userS.getUser();
+  }
+
+  async updateUserProfile() {
+    try {
+      const updatedUser = await this.userService.updateUser(this.user.id, this.user);
+      console.log("User updated successfully: ", updatedUser);
+      // Vous pouvez ajouter ici d'autres actions après la mise à jour réussie
+    } catch (error) {
+      console.error("Error updating user: ", error);
+      // Gérer les erreurs de mise à jour ici
     }
   }
 
-  onSubmit() {
-    if (this.editUserForm.valid && this.userId !== null) {
-      this.userService.updateUser(this.userId, this.editUserForm.value).then(
-        (data) => {
-          console.log('Utilisateur mis à jour avec succès', data);
-         // this.router.navigate(['/proprietaire']); // Redirige vers la liste des utilisateurs après la mise à jour
-        },
-        (error) => {
-          console.error('Erreur lors de la mise à jour de l\'utilisateur', error);
-        }
-      );
-    }
-  }
 }

@@ -18,7 +18,8 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
 
     const appartement = await findAppartementByName(appartementNom)
 
-      const user =await  findUserByAppartement(appartement.id)
+
+      const user =await  appartement.user
 
 
     //const user = await findUserByEmail(nom_client);

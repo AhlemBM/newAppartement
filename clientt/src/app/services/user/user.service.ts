@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import axios from "axios";
 import {RegisterService} from "../authService/auth.service";
-
+export interface User {
+  id: number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  // Ajoutez d'autres champs si nécessaire
+}
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class UserService {
   private backendUrl = 'http://localhost:9001/api/v1/user';
 

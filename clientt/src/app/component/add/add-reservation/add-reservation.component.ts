@@ -11,7 +11,7 @@ export class AddReservationComponent implements OnInit {
   appartements: any[] = [];
   selectedAppartement: any = null;
   reservation = {
-    appartement: '',
+    appartementNom: '',
     date_debut: new Date(),
     nom_client: '',
     nombre_nuits: 0,
@@ -71,7 +71,7 @@ export class AddReservationComponent implements OnInit {
       }
 
       const reservationData = {
-        appartement: this.selectedAppartement.name,
+        appartementNom: this.selectedAppartement.name,
         date_debut: this.reservation.date_debut,
         nom_client: this.reservation.nom_client,
         nombre_nuits: this.reservation.nombre_nuits,

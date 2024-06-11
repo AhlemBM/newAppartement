@@ -1,17 +1,20 @@
 <div class="body-wrapper">
   <div class="container-fluid">
-<div class="container">
-  <h2>Modifier l'utilisateur</h2>
-  <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="nom">Nom</label>
-      <input id="nom" formControlName="nom" class="form-control" />
-    </div>
-
-
-    <!-- Ajoutez d'autres champs nécessaires -->
-    <button type="submit" class="btn btn-primary" [disabled]="editUserForm.invalid">Modifier</button>
-  </form>
-</div>
+<form (ngSubmit)="updateUserProfile()" #userForm="ngForm">
+  <div>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" required>
   </div>
-</div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" required>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+  </div>
+  <!-- Ajoutez d'autres champs si nécessaire -->
+
+  <button type="submit" [disabled]="userForm.invalid">Update</button>
+</form>
+  </div></div>
