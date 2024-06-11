@@ -5,8 +5,12 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="1">
+          <list size="5">
             <item index="0" class="java.lang.String" itemvalue="matinput" />
+            <item index="1" class="java.lang.String" itemvalue="matcolumndef" />
+            <item index="2" class="java.lang.String" itemvalue="mat-header-cell" />
+            <item index="3" class="java.lang.String" itemvalue="mat-sort-header" />
+            <item index="4" class="java.lang.String" itemvalue="mat-cell" />
           </list>
         </value>
       </option>
@@ -15,7 +19,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="12">
+          <list size="13">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -28,6 +32,7 @@
             <item index="9" class="java.lang.String" itemvalue="mat-label" />
             <item index="10" class="java.lang.String" itemvalue="mat-datepicker-toggle" />
             <item index="11" class="java.lang.String" itemvalue="mat-datepicker" />
+            <item index="12" class="java.lang.String" itemvalue="mat-paginator" />
           </list>
         </value>
       </option>

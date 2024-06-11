@@ -58,4 +58,31 @@
       this.router.navigate(['/edit-user', user.id]);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    deleteUser(user: User): void {
+      if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${user.nom} ${user.prenom} ?`)) {
+        this.userService.deleteUser(user.id)
+          .then(response => {
+            if (response.status === 200) {
+              this.users = this.users.filter(u => u.id !== user.id);
+            } else {
+              this.errorMessage = 'Erreur lors de la suppression de l\'utilisateur.';
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.errorMessage = 'Une erreur est survenue lors de la suppression. Veuillez réessayer.';
+          });
+      }
+    }
   }

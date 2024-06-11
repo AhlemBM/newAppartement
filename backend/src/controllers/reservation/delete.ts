@@ -12,10 +12,10 @@ export const deleteCheckin = async (
   next: NextFunction
 ) => {
   const CheckId = req.params.id;
-  const { id } = req.jwtPayload;
+const { id } = req.jwtPayload;
     try {
 
-      const checkin = await findCheckinByIdAndUser(id);
+    const checkin = await findCheckinByIdAndUser(id);
 
       if (!checkin) {
         return res.customSuccess(200, 'reservation not found', {}, false);

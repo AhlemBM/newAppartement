@@ -38,6 +38,7 @@ export const deleteCheckinById = async (id) => {
   return await checkinRespository.delete({ id: Equal(id) });
 };
 
+
 export const findCheckinById = async (
     checkId: number,
     userId: number,

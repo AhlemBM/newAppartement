@@ -2,9 +2,13 @@ import {Equal, FindOptionsWhere, getRepository} from 'typeorm';
 
 import { AppDataSource } from '../orm/data-source';
 import { UserEntity } from '../orm/entities/user.entity';
+import {AppartementEntity} from "../orm/entities/appartement.entity";
+import {ChekinEntity} from "../orm/entities/checkin.entity";
 
 const userRepository = AppDataSource.getRepository(UserEntity);
+const appartementRespository = AppDataSource.getRepository(AppartementEntity);
 
+const checkinRespository = AppDataSource.getRepository(ChekinEntity);
 export const createUser = async (input: Partial<UserEntity>) => {
   return await userRepository.save(userRepository.create(input));
 };
@@ -41,9 +45,24 @@ export const findUsers = async () => {
 export const countUsers = async (query: any) => {
   return await userRepository.countBy(query as FindOptionsWhere<UserEntity>);
 };
-export const deleteUser = async (user) => {
-  await saveUser(user);
-  return await userRepository.delete({ id: Equal(user.id) });
+export const deleteUser = async (userId) => {
+
+
+  try {
+    // Supprimer les réservations associées à l'utilisateur
+    await checkinRespository.delete({ user: { id: userId } });
+
+    // Supprimer les appartements associés à l'utilisateur
+    await appartementRespository.delete({ user: { id: userId } });
+
+    // Enfin, supprimer l'utilisateur lui-même
+    await userRepository.delete(userId);
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting user and related entities:", error);
+    return { success: false, error: error.message };
+  }
 };
 
 // Nouvelle méthode pour récupérer les utilisateurs avec leurs appartements

@@ -7,6 +7,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 
 interface Reservation {
+  id: number;
   appartement: { name: string };
   date_debut: string;
   nom_client: string;
@@ -25,8 +26,7 @@ export class ReservationComponent implements OnInit {
   reservations: Reservation[] = [];
   errorMessage: string = '';
   dataSource = new MatTableDataSource<Reservation>(this.reservations);
-  displayedColumns: string[] = ['appartement', 'date_debut', 'nom_client', 'nombre_nuits', 'commission', 'prix_total', 'status'];
-
+  displayedColumns: string[] = ['appartement', 'date_debut', 'nom_client', 'nombre_nuits', 'commission', 'prix_total', 'status', 'Delete'];
 
   filterLogement: string = '';
   filterYear: number | null = null;
@@ -41,6 +41,7 @@ export class ReservationComponent implements OnInit {
   }
 
   fetchReservations(): void {
+
     this.reservationService.getAllReservations()
       .then(response => {
         if (response.success) {
@@ -87,5 +88,25 @@ export class ReservationComponent implements OnInit {
 
   goToAddReservation(): void {
     this.router.navigate(['/addreservation']);
+  }
+
+
+  deleteReservation(reservation: Reservation): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')) {
+
+
+      this.reservationService.deleteReservation(reservation.id)
+     .then(response => {
+          if (response.status === 200) {
+            // Si la suppression est réussie, mettre à jour la liste des réservations
+            this.fetchReservations();
+          } else {
+            console.error('Failed to delete reservation:', response.data);
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting reservation:', error);
+        });
+    }
   }
 }

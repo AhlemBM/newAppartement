@@ -17,6 +17,8 @@ import { validatorResetPassword } from '../../middleware/validation/users';
 import { checkRole } from '../../middleware/checkRole';
 import {findAll, findById} from "../../controllers/users/findAll";
 import {getDashboardData} from "../../services/dashbordAdmin.service";
+import {deleteAppartement} from "../../controllers/appartement";
+import {deleteUserr} from "../../controllers/users/delet";
 
 
 
@@ -31,7 +33,7 @@ router.put('/edit-profile/:id',  editProfile);
 router.delete('/profile/:id', [checkJwt],checkRole(['ADMIN']), deleteProfile);
 router.get('/getAll', findAll);
 router.get('/get/:id', findById);
-
+router.delete('/delete/:id', deleteUserr);
 
 router.get('/dashboard', getDashboardData);
 

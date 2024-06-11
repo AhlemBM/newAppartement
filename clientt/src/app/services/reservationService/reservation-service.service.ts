@@ -10,6 +10,8 @@ export class ReservationServiceService {
 
   constructor(private authService: RegisterService) {
   }
+  private tokenKey: string = 'authToken';
+  private userKey: string = 'authUser';
 
   private static getAuthToken(): string | null {
     return localStorage.getItem('authToken');
@@ -54,9 +56,9 @@ export class ReservationServiceService {
   }
 
   async getAllReservations(): Promise<any> {
-    const token = ReservationServiceService.getAuthToken();
+    const token = this.authService.getAuthToken();
     if (!token) {
-      return {success: false, message: 'No authentication token found'};
+      return Promise.reject('No token found');
     }
 
     try {
@@ -92,6 +94,20 @@ export class ReservationServiceService {
       console.error('Error fetching reservations by year:', error);
       return {success: false};
     }
+  }
+
+  async deleteReservation (id:number): Promise<any> {
+    const token = this.authService.getAuthToken();
+    console.log(token)
+    if (!token) {
+      return Promise.reject('No token found');
+    }
+
+   return  await axios.delete<any>(`http://localhost:9001/api/v1/reservation/delete/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
 

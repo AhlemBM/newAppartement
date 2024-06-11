@@ -130,6 +130,12 @@ export class UserService {
     }
   }
 
+  async deleteUser (userId: number): Promise<any> {
+
+     return  await axios.delete<any>(`http://localhost:9001/api/v1/user/delete/${userId}`);
+
+  }
+
 
 
 
